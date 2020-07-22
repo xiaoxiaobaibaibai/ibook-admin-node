@@ -4,27 +4,7 @@ const fs = require('fs')
 const https = require('https')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-// function myLogger(req, res, next) {
-//     console.log('myLogger')
-//     next()
-// }
-//
-// app.use(myLogger())
 
-// app.get('/', function (req, res) {
-//     res.send('hello node')
-//     throw new Error('err')
-// })
-//
-// function errorHandler(err, req, res, next) {
-//     console.log(err)
-//     res.status(500).json({
-//         error: -1,
-//         msg: err.toString()
-//     })
-// }
-//
-// app.use(errorHandler)
 
 const app = express()
 
