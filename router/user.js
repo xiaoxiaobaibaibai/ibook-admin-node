@@ -42,19 +42,22 @@ router.post('/login',
     }
 })
 
-router.get('/info', function (req, res) {
+router.get('/info', function(req, res) {
     const decoded = decode(req)
-    findUser('admin').then(user => {
-        console.log(user)
-        if (user) {
-            user.roles = [user.role]
-            new Result(user,'用户信息查询成功').success(res)
-        } else {
-            new Result('用户信息查询失败').fail(res)
-        }
-
-    })
-
+    const username = decoded.username[0].username
+    if (decoded && username) {
+        findUser(username).then(user => {
+            if (user) {
+                user.roles = [user.role]
+                new Result(user, '获取用户信息成功').success(res)
+            } else {
+                console.log(username)
+                new Result('获取用户信息失败').fail(res)
+            }
+        })
+    } else {
+        new Result('用户信息解析失败').fail(res)
+    }
 })
 
 module.exports = router
