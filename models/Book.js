@@ -1,7 +1,7 @@
 const { MIME_TYPE_EPUB, UPLOAD_URL, UPLOAD_PATH } = require('../utils/constant')
 const fs = require('fs')
 const Epub = require('../utils/epub')
-
+const path = require('path')
 class Book {
     constructor(file, data) {
         if (file) {
@@ -93,8 +93,9 @@ class Book {
                                 const suffix = mimeType.split('/')[1]
                                 const coverPath = `${UPLOAD_PATH}/img/${this.fileName}.${suffix}`
                                 const coverUrl = `${UPLOAD_URL}/img/${this.fileName}.${suffix}`
-                                 // const winCoverUrl = coverUrl.replace(/\//g,'\\')
-                                fs.writeFileSync(coverPath, imgBuffer, 'binary')
+                                // const newCoverPath =  path.join(coverPath)
+                                const winCoverPath = coverPath.replace(/\//g,'\\')
+                                fs.writeFileSync(winCoverPath, imgBuffer, 'binary')
                                 this.coverPath = `/img/${this.fileName}.${suffix}`
                                 this.cover = coverUrl
                                 resolve(this)
